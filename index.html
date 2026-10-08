@@ -4,131 +4,386 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>बहुरुपी कलावंत | BAHURUPI KALAWANT</title>
-    <!-- Google Fonts for Indian & Theater Royal Look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rozha+One&family=Yatra+One&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffae19 50%, #d48806 100%);
-            --red-velvet: #4a0404;
-            --dark-stage: #090302;
-            --card-bg: rgba(35, 10, 10, 0.85);
+            --bg-color: #1a0505;
+            --card-color: #2b0c0c;
+            --gold: #f5b041;
+            --gold-light: #fbeee0;
             --gold-border: #d4af37;
-            --text-glow: 0 0 12px rgba(255, 215, 0, 0.5);
+            --accent-red: #8b0000;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            user-select: none;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
-            background-color: var(--dark-stage);
-            background-image: 
-                radial-gradient(circle at 50% 10%, rgba(139, 0, 0, 0.45), transparent 70%),
-                radial-gradient(circle at 50% 90%, rgba(212, 175, 55, 0.1), transparent 60%);
-            color: #fff4e6;
-            font-family: 'Tiro Devanagari Marathi', serif;
+            background-color: var(--bg-color);
+            color: #ffffff;
             min-height: 100vh;
+            padding: 16px;
             display: flex;
             justify-content: center;
-            padding: 24px 12px;
         }
 
-        .main-stage {
+        .container {
             width: 100%;
-            max-width: 820px;
-            background: var(--card-bg);
+            max-width: 680px;
+            background-color: var(--card-color);
             border: 2px solid var(--gold-border);
-            border-radius: 20px;
-            padding: 32px 24px;
-            box-shadow: 0 0 35px rgba(212, 175, 55, 0.25), inset 0 0 20px rgba(0,0,0,0.8);
-            position: relative;
+            border-radius: 16px;
+            padding: 24px 18px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
         }
 
-        /* Nataraja Header Section */
+        /* Views */
+        .view-screen {
+            display: block;
+        }
+        .detail-screen {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Nataraja Emblem */
+        .emblem-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .emblem-box {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: radial-gradient(circle, #5c1111 0%, #1a0505 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(245, 176, 65, 0.4);
+        }
+
+        /* Titles */
         .hero {
             text-align: center;
             border-bottom: 2px dashed rgba(212, 175, 55, 0.4);
-            padding-bottom: 24px;
-            margin-bottom: 28px;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+        }
+        .title-main {
+            font-size: 2.3rem;
+            color: var(--gold);
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(245, 176, 65, 0.4);
+            margin-bottom: 4px;
+        }
+        .title-sub {
+            font-size: 1.1rem;
+            color: #e0d0c0;
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
-        .nataraj-container {
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 16px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-            border: 2px solid var(--gold-border);
+        /* Lineage Card */
+        .info-card {
+            background-color: #170404;
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .info-card b {
+            color: var(--gold);
+        }
+
+        /* Section Title */
+        .section-heading {
+            font-size: 1.35rem;
+            color: var(--gold);
+            margin: 22px 0 14px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 6px;
+        }
+
+        /* Clickable Work Area Grid */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .work-item {
+            background-color: #1c0505;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 1.1rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+        .work-item:hover {
+            border-color: var(--gold);
+            background-color: #3b0e0e;
+            transform: translateY(-2px);
         }
 
-        .nataraj-img {
-            width: 85px;
-            height: 85px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px #ffd700);
-        }
-
-        .title-mr {
-            font-family: 'Rozha One', serif;
-            font-size: 2.8rem;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: var(--text-glow);
-            letter-spacing: 1px;
-            line-height: 1.2;
-            margin-bottom: 6px;
-        }
-
-        .title-en {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 1.1rem;
-            color: #f7d794;
-            letter-spacing: 4px;
-            font-weight: 700;
-        }
-
-        /* Founder Banner */
-        .lineage-card {
-            background: linear-gradient(90deg, rgba(80, 0, 0, 0.5), rgba(40, 0, 0, 0.8), rgba(80, 0, 0, 0.5));
-            border-left: 4px solid #ffd700;
-            border-right: 4px solid #ffd700;
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 30px;
+        /* Plays List */
+        .play-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 1.15rem;
+            gap: 12px;
+            margin-bottom: 26px;
         }
-
-        .lineage-card span {
-            color: #ffd700;
-            font-family: 'Yatra One', cursive;
-            font-size: 1.25rem;
-        }
-
-        /* Section Headings */
-        .section-header {
-            font-family: 'Yatra One', cursive;
-            color: #ffeaa7;
-            font-size: 1.55rem;
-            margin: 28px 0 16px;
+        .play-card {
+            background: linear-gradient(90deg, #1f0404, #3a0d0d);
+            border: 1px solid var(--gold-border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffe6a3;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-left: 5px solid #d4af37;
-            padding-left: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+        .play-card:hover {
+            border-color: #ffffff;
+            background: #4a1010;
+            transform: translateX(4px);
+        }
+        .arrow-badge {
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border: 1px solid var(--gold);
         }
 
-        /* Grid
+        /* Contact Box */
+        .contact-box {
+            background: #170404;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 24px;
+        }
+        .contact-heading {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+        .call-btn {
+            background: linear-gradient(135deg, #f5b041, #d48806);
+            color: #120202;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .call-btn:hover {
+            filter: brightness(1.15);
+        }
+
+        /* Detailed Page View */
+        .detail-content {
+            background-color: #170404;
+            border: 2px solid var(--gold);
+            border-radius: 14px;
+            padding: 24px;
+            margin-top: 14px;
+        }
+        .detail-title {
+            color: var(--gold);
+            font-size: 2rem;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+        }
+        .detail-desc {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #faebd7;
+            margin-bottom: 26px;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #f5b041, #d48806);
+            border: none;
+            color: #1a0505;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            color: #998080;
+            font-size: 0.85rem;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Screen 1: Main Home Stage -->
+    <div id="homeScreen" class="view-screen">
+        <header class="hero">
+            <div class="emblem-wrapper">
+                <div class="emblem-box">
+                    <!-- Crisp Golden Nataraja Silhouette (Inline SVG) -->
+                    <svg width="60" height="60" viewBox="0 0 100 100" fill="#f5b041">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#f5b041" stroke-width="3" stroke-dasharray="4,2"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="#f5b041" stroke-width="1.5"/>
+                        <circle cx="50" cy="22" r="6" />
+                        <path d="M50 28 L50 56 L35 76 M50 56 L65 76" stroke="#f5b041" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <path d="M26 38 Q50 32 74 38" stroke="#f5b041" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <path d="M30 46 Q50 48 70 42" stroke="#f5b041" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <rect x="36" y="82" width="28" height="6" rx="3"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="title-main">बहुरुपी कलावंत</h1>
+            <div class="title-sub">BAHURUPI KALAWANT</div>
+        </header>
+
+        <div class="info-card">
+            <p>संस्थापक: <b>श्री. प्रसन्न लक्ष्मणराव काटे</b></p>
+            <p>प्रेरणा: <b>नटवर्य लक्ष्मणराव काटे</b></p>
+        </div>
+
+        <h2 class="section-heading">🎯 कार्य क्षेत्र (Click to View)</h2>
+        <div class="work-grid">
+            <div class="work-item" onclick="showPage('नाट्य निर्मिती', 'संस्थेमार्फत दर्जेदार प्रायोगिक आणि व्यावसायिक नाटकांची लेखन, दिग्दर्शन व भव्य निर्मिती केली जाते.')">
+                <span>🎭 नाट्य निर्मिती</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('मालिका निर्मिती', 'विविध नामांकित वाहिन्यांसाठी टेलिव्हिजन मालिका आणि मनोरंजक भागांची निर्मिती.')">
+                <span>📺 मालिका निर्मिती</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('चित्रपट निर्मिती', 'सामाजिक, मनोरंजक व वैचारिक विषयांवर आधारित फीचर व व्यावसायिक चित्रपट निर्मिती.')">
+                <span>🎬 चित्रपट निर्मिती</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('लघुपट / वेब कंटेंट', 'डिजिटल युगातील प्रेक्षकांसाठी दर्जेदार शॉर्ट फिल्म्स, वेबसिरीज व युट्यूब कंटेंट निर्मिती.')">
+                <span>🎥 लघुपट / वेब कंटेंट</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('अभिनय व कला क्षेत्र', 'कलाकारांच्या अंगभूत कलागुणांना पैलू पाडणे आणि विविध कलाप्रकारांना रंगमंच उपलब्ध करून देणे.')">
+                <span>🎨 अभिनय व कला क्षेत्र</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('संगीत व सांस्कृतिक निर्मिती', 'पारंपारिक, शास्त्रीय संगीत, नाट्यसंगीत आणि सांस्कृतिक कार्यक्रमांचे भव्य आयोजन.')">
+                <span>🎼 संगीत व सांस्कृतिक निर्मिती</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('नवोदित कलाकारांना संधी', 'नवीन आणि होतकरू कलाकारांना ऑडिशन्स आणि कार्यशाळांच्या माध्यमातून मुख्य प्रवाहात आणणे.')">
+                <span>👥 नवोदित कलाकारांना संधी</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+            <div class="work-item" onclick="showPage('विविध दृक्-श्राव्य कलानिर्मिती', 'अत्याधुनिक तंत्रज्ञान आणि सर्जनशीलतेचा मेळ घालून ऑडिओ-व्हिज्युअल प्रॉडक्शन.')">
+                <span>🎞️ विविध दृक्-श्राव्य कलानिर्मिती</span> <span class="arrow-badge">उघडा ➔</span>
+            </div>
+        </div>
+
+        <h2 class="section-heading">🎟️ संस्थेच्या निर्मिती / नाट्यकृती</h2>
+        <div class="play-list">
+            <div class="play-card" onclick="showPage('देवकार्य', 'बहुरुपी कलावंत प्रस्तुत एक अत्यंत भावनिक आणि संस्कारक्षम कौटुंबिक नाट्यकृती.')">
+                <span>✨ देवकार्य</span> <span class="arrow-badge">माहिती पहा ➔</span>
+            </div>
+            <div class="play-card" onclick="showPage('तरुणाई', 'युवा पिढीचे विचार, संघर्ष आणि त्यांची ऊर्जा मांडणारे एक वेगवान नाटक.')">
+                <span>✨ तरुणाई</span> <span class="arrow-badge">माहिती पहा ➔</span>
+            </div>
+            <div class="play-card" onclick="showPage('भागी', 'मानवी नातेसंबंध आणि सामाजिक वास्तवावर भेदक प्रकाश टाकणारी प्रभावी कलाकृती.')">
+                <span>✨ भागी</span> <span class="arrow-badge">माहिती पहा ➔</span>
+            </div>
+            <div class="play-card" onclick="showPage('No Sentiments Plzz', 'आजच्या आधुनिक जीवनशैलीवर खुसखुशीत भाष्य करणारे हलके-फुलके आणि विचार करायला लावणारे नाटक.')">
+                <span>✨ No Sentiments Plzz</span> <span class="arrow-badge">माहिती पहा ➔</span>
+            </div>
+            <div class="play-card" onclick="showPage('वावटळ', 'संघर्ष, सस्पेन्स आणि कलाकारांचा उच्च दर्जाचा अभिनय दाखवणारी नाट्यकृती.')">
+                <span>✨ वावटळ</span> <span class="arrow-badge">माहिती पहा ➔</span>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <div class="contact-heading">📞 संपर्क साधा (Contact Us)</div>
+            <div class="contact-actions">
+                <a href="tel:8530196754" class="call-btn">
+                    <span>📞</span> 8530196754
+                </a>
+                <a href="tel:9226194332" class="call-btn">
+                    <span>📞</span> 9226194332
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            &copy; बहुरुपी कलावंत (BAHURUPI KALAWANT). सर्व हक्क सुरक्षित.
+        </footer>
+    </div>
+
+    <!-- Screen 2: Dedicated Detailed Page -->
+    <div id="detailScreen" class="detail-screen">
+        <button class="back-btn" onclick="goHome()">❮ मागे जा (Back)</button>
+        <div class="detail-content">
+            <h1 class="detail-title" id="pageTitleText">शीर्षक</h1>
+            <p class="detail-desc" id="pageDescText">माहिती...</p>
+            <div class="contact-box" style="margin-top: 15px;">
+                <div class="contact-heading">चौकशीसाठी थेट संपर्क साधा:</div>
+                <div class="contact-actions">
+                    <a href="tel:8530196754" class="call-btn"><span>📞</span> 8530196754</a>
+                    <a href="tel:9226194332" class="call-btn"><span>📞</span> 9226194332</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showPage(title, description) {
+        document.getElementById('pageTitleText').innerText = title;
+        document.getElementById('pageDescText').innerText = description;
+        document.getElementById('homeScreen').style.display = 'none';
+        document.getElementById('detailScreen').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function goHome() {
+        document.getElementById('detailScreen').style.display = 'none';
+        document.getElementById('homeScreen').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
